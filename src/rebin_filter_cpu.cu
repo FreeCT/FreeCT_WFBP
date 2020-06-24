@@ -147,8 +147,8 @@ void rebin_nffs_cpu(struct recon_metadata *mr){
     // Check "testing" flag, write rebin to disk if set
     if (mr->flags.testing){
 	char fullpath[4096+255];
-	strcpy(fullpath,mr->output_dir);
-	strcat(fullpath,"rebin.ct_test");
+	strcpy(fullpath,mr->rp.output_dir);
+	strcat(fullpath,"/rebin.ct_test");
 	FILE * outfile=fopen(fullpath,"w");
 	fwrite(mr->ctd.rebin,sizeof(float),cg.n_channels_oversampled*cg.n_rows*(mr->ri.n_proj_pull-2*cg.add_projections_ffs)/mr->ri.n_ffs,outfile);
 	fclose(outfile);
@@ -275,8 +275,8 @@ void rebin_pffs_cpu(struct recon_metadata *mr){
     // Check "testing" flag, write rebin to disk if set
     if (mr->flags.testing){
 	char fullpath[4096+255];
-	strcpy(fullpath,mr->output_dir);
-	strcat(fullpath,"rebin.ct_test");
+	strcpy(fullpath,mr->rp.output_dir);
+	strcat(fullpath,"/rebin.ct_test");
 	FILE * outfile=fopen(fullpath,"w");
 	fwrite(mr->ctd.rebin,sizeof(float),cg.n_channels_oversampled*cg.n_rows*(mr->ri.n_proj_pull-2*cg.add_projections_ffs)/mr->ri.n_ffs,outfile);
 	fclose(outfile);
@@ -399,8 +399,8 @@ void rebin_zffs_cpu(struct recon_metadata *mr){
     // Check "testing" flag, write rebin to disk if set
     if (mr->flags.testing){
 	char fullpath[4096+255];
-	strcpy(fullpath,mr->output_dir);
-	strcat(fullpath,"rebin.ct_test");
+	strcpy(fullpath,mr->rp.output_dir);
+	strcat(fullpath,"/rebin.ct_test");
 	FILE * outfile=fopen(fullpath,"w");
 	fwrite(mr->ctd.rebin,sizeof(float),cg.n_channels_oversampled*cg.n_rows*(mr->ri.n_proj_pull-2*cg.add_projections_ffs)/mr->ri.n_ffs,outfile);
 	fclose(outfile);
@@ -463,29 +463,29 @@ void rebin_affs_cpu(struct recon_metadata *mr){
     // Check 'testing' flag, and write to disk if set
     if (mr->flags.testing){
 	char fullpath[4096+255];
-	strcpy(fullpath,mr->output_dir);
-	strcat(fullpath,"reshape_1.ct_test");
+	strcpy(fullpath,mr->rp.output_dir);
+	strcat(fullpath,"/reshape_1.ct_test");
 	FILE * outfile=fopen(fullpath,"w");
 	fwrite(raw_1,sizeof(float),cg.n_channels*cg.n_rows_raw*ri.n_proj_pull/ri.n_ffs,outfile);
 	fclose(outfile);
 
 	memset(fullpath,0,4096+255);
-	strcpy(fullpath,mr->output_dir);
-	strcat(fullpath,"reshape_2.ct_test");
+	strcpy(fullpath,mr->rp.output_dir);
+	strcat(fullpath,"/reshape_2.ct_test");
 	outfile=fopen(fullpath,"w");
 	fwrite(raw_2,sizeof(float),cg.n_channels*cg.n_rows_raw*ri.n_proj_pull/ri.n_ffs,outfile);
 	fclose(outfile);
 
 	memset(fullpath,0,4096+255);
-	strcpy(fullpath,mr->output_dir);
-	strcat(fullpath,"reshape_3.ct_test");
+	strcpy(fullpath,mr->rp.output_dir);
+	strcat(fullpath,"/reshape_3.ct_test");
 	outfile=fopen(fullpath,"w");
 	fwrite(raw_3,sizeof(float),cg.n_channels*cg.n_rows_raw*ri.n_proj_pull/ri.n_ffs,outfile);
 	fclose(outfile);
 
 	memset(fullpath,0,4096+255);
-	strcpy(fullpath,mr->output_dir);
-	strcat(fullpath,"reshape_4.ct_test");
+	strcpy(fullpath,mr->rp.output_dir);
+	strcat(fullpath,"/reshape_4.ct_test");
 	outfile=fopen(fullpath,"w");
 	fwrite(raw_4,sizeof(float),cg.n_channels*cg.n_rows_raw*ri.n_proj_pull/ri.n_ffs,outfile);
 	fclose(outfile);
@@ -553,15 +553,15 @@ void rebin_affs_cpu(struct recon_metadata *mr){
 
     if (mr->flags.testing){
 	char fullpath[4096+255];
-	strcpy(fullpath,mr->output_dir);
-	strcat(fullpath,"rebin_t1.ct_test");
+	strcpy(fullpath,mr->rp.output_dir);
+	strcat(fullpath,"/rebin_t1.ct_test");
 	FILE * outfile=fopen(fullpath,"w");
 	fwrite(rebin_t_1,sizeof(float),cg.n_channels_oversampled*cg.n_rows_raw*ri.n_proj_pull/ri.n_ffs,outfile);
 	fclose(outfile);
 	
 	memset(fullpath,0,4096+255);
-	strcpy(fullpath,mr->output_dir);
-	strcat(fullpath,"rebin_t2.ct_test");
+	strcpy(fullpath,mr->rp.output_dir);
+	strcat(fullpath,"/rebin_t2.ct_test");
 	outfile=fopen(fullpath,"w");
 	fwrite(rebin_t_2,sizeof(float),cg.n_channels_oversampled*cg.n_rows_raw*ri.n_proj_pull/ri.n_ffs,outfile);
 	fclose(outfile);
@@ -630,8 +630,8 @@ void rebin_affs_cpu(struct recon_metadata *mr){
     // Check "testing" flag, write rebin to disk if set
     if (mr->flags.testing){
 	char fullpath[4096+255];
-	strcpy(fullpath,mr->output_dir);
-	strcat(fullpath,"rebin.ct_test");
+	strcpy(fullpath,mr->rp.output_dir);
+	strcat(fullpath,"/rebin.ct_test");
 	FILE * outfile=fopen(fullpath,"w");
 	fwrite(mr->ctd.rebin,sizeof(float),cg.n_channels_oversampled*cg.n_rows*(mr->ri.n_proj_pull-2*cg.add_projections_ffs)/mr->ri.n_ffs,outfile);
 	fclose(outfile);
@@ -654,17 +654,20 @@ void filter_cpu(float * row, float * filter, int N){
     fftw_complex * R = (fftw_complex*)fftw_malloc(sizeof(fftw_complex)*M);
     memset(R,0,M*sizeof(fftw_complex));
     for (int i=0;i<N;i++){
-	R[i]=row[i];
+	R[i][0]=row[i];
+        R[i][1]=0.0;
     }
 
     fftw_complex * F=(fftw_complex*)fftw_malloc(sizeof(fftw_complex)*M);
     memset(F,0,M*sizeof(fftw_complex));
     
     for (int i=0;i<N;i++){
-	F[i]=filter[(int)floor((2.0f*N-1.0f)/2.0f)+1+i];
+	F[i][0]=filter[(int)floor((2.0f*N-1.0f)/2.0f)+1+i];
+        F[i][1]=0.0;
     }
     for (int i=(M-N+1);i<M;i++){
-	F[i]=filter[i-(M-N+1)+1];
+	F[i][0]=filter[i-(M-N+1)+1];
+        F[i][1]=filter[i-(M-N+1)+1];
     }
 
     // Allocate complex output vectors for row and filter FFTs
@@ -681,7 +684,11 @@ void filter_cpu(float * row, float * filter, int N){
     //Multiply row and filter into output array
     fftw_complex * O_fourier=(fftw_complex*)fftw_malloc(sizeof(fftw_complex)*M);
     for (int i=0;i<M;i++){
-	O_fourier[i]=R_fourier[i]*F_fourier[i];
+      //O_fourier[i]=R_fourier[i]*F_fourier[i];
+
+        O_fourier[i][0] = R_fourier[i][0]*F_fourier[i][0] - R_fourier[i][1]*F_fourier[i][1];
+        O_fourier[i][1] = R_fourier[i][0]*F_fourier[i][1] - R_fourier[i][1]*F_fourier[i][0];
+        
     }
 
     //Prep final output array and plan, then execute
@@ -692,7 +699,8 @@ void filter_cpu(float * row, float * filter, int N){
 
     //Copy real portion of final result into source row
     for (int i=0;i<N;i++){
-	row[i]=(1.0f/(float)M)*(float)creal(O[i]);
+      //row[i]=(1.0f/(float)M)*(float)creal(O[i]);
+      row[i]=(1.0f/(float)M)*(float)(O[i][0]);
     }
 
     // Clean up

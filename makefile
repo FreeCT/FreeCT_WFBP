@@ -35,11 +35,29 @@ else
 	cp -v -u -r ${SRC_DIR}LICENSE.md ${INSTALL_PATH}
 
 # Create our execution script
+<<<<<<< HEAD
 	@echo Creating execution script ${SCRIPT_PATH}fct_wfbp...
 	touch ${SCRIPT_PATH}fct_wfbp
 	chmod +x ${SCRIPT_PATH}fct_wfbp
 	@echo "#!/bin/bash" > ${SCRIPT_PATH}fct_wfbp
 	@echo ${INSTALL_PATH}fct_wfbp \"\$$\@\" >> ${SCRIPT_PATH}fct_wfbp
+=======
+	@echo Creating execution script ${SCRIPT_PATH}ctbb_recon...
+	touch ${SCRIPT_PATH}ctbb_recon
+	chmod +x ${SCRIPT_PATH}ctbb_recon
+	@echo "#!/bin/bash" > ${SCRIPT_PATH}ctbb_recon
+	@echo ${INSTALL_PATH}ctbangbang \"\$$\@\" >> ${SCRIPT_PATH}ctbb_recon
+
+	@echo "exit_status=\$$?" >> ${SCRIPT_PATH}ctbb_recon
+	@echo "if [ \$$exit_status -eq 0 ]" >> ${SCRIPT_PATH}ctbb_recon
+	@echo "then" >> ${SCRIPT_PATH}ctbb_recon
+	@echo notify-send \"Reconstruction completed\" >> ${SCRIPT_PATH}ctbb_recon
+	@echo "else" >> ${SCRIPT_PATH}ctbb_recon
+	@echo notify-send \"Reconstruction FAILED\" >> ${SCRIPT_PATH}ctbb_recon
+	@echo "fi" >> ${SCRIPT_PATH}ctbb_recon
+	@echo "exit \$$exit_status" >> ${SCRIPT_PATH}ctbb_recon
+
+>>>>>>> upstream/master
 endif
 
 
