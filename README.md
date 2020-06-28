@@ -1,5 +1,7 @@
 # FreeCT_WFBP
 
+**NOTE:  No further updates or changes will be made to this repository.  I am currently in the process of migrating the entirety of the FreeCT project into one project: https://github.com/FreeCT/FreeCT.   This should simplify building and installing in every single way, however in the mean time there are going to be some growing pains and the project will be non-functional.  If you have any questions or comments please reach out to johnmarianhoffman@gmail.com.**
+
 ## What is FreeCT_WFBP?
 
 FreeCT_WFBP is lightweight, gpu-based, reconstruction software for third generation helical CT scans.  It is intended to be fast, adaptable, and (relatively) easy to use and understand.  It is free software (released under the GNU GPLv2) intended for use in research and education.  Modification and contributions are encouraged.
